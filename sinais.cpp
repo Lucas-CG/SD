@@ -5,9 +5,10 @@
 #include <sstream> //criar sstream (para converter string p int)
 #include <unistd.h> //fork
 
-//SIGCHLD: 17
-
 using namespace std;
 
-int child = fork();
+int child = fork(); //cria processo filho, retorna pid do filho para o pai e 0 para o filho
+//Sinal para encerrar o processo filho: SIGCHLD (17)
+
+
 

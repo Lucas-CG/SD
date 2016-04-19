@@ -36,11 +36,9 @@ int main(int argc, char* argv[]) {
 
 
 	int x = system("ps aux | grep 'receptor.exe' | head -1 | awk '{print $2}' ");
+
+	kill(x, signalCode);
 	
-	//int x = system("ps aux | grep 'receptor.exe' ");
-
-	cout << x << endl;
-
 	return 0;
 
 
