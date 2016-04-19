@@ -1,8 +1,9 @@
-#include <signal.h>
-#include <iostream>
-#include <stdlib.h>
-#include <string>
-#include <sstream>
+#include <signal.h> //signal, kill
+#include <iostream> //cout, cin
+#include <stdlib.h> //atoi (string para inteiro), comando "system"
+#include <string> //strings, getline
+#include <sstream> //criar sstream (para converter string p int)
+
 
 using namespace std;
 

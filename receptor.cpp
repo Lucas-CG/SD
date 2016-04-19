@@ -1,5 +1,6 @@
-#include <signal.h>
-#include <iostream>
+#include <signal.h> //signal, kill
+#include <iostream> //cout, cin
+
 
 void signal_handler(int code){
 
