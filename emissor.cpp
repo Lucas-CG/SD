@@ -1,4 +1,4 @@
-#include <signal.h> //signal, kill
+#include <csignal> //signal, kill
 #include <iostream> //cout, cin
 #include <stdlib.h> //atoi (string para inteiro), comando "system"
 #include <string> //strings, getline

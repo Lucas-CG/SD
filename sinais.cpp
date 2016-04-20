@@ -1,4 +1,4 @@
-#include <signal.h> //signal, kill
+#include <csignal> //signal, kill
 #include <iostream> //cout, cin
 #include <stdlib.h> //atoi (string para inteiro), comando "system"
 #include <string> //strings, getline
@@ -67,11 +67,7 @@ int main(int argc, char* argv) {
 		}
 
 
-		int x = system("ps aux | grep 'receptor.exe' | head -1 | awk '{print $2}' ");
-
-		kill(x, signalCode);
-		
-		return 0;
+		kill(child, signalCode); //enviar sinal de código signalCode para filho
 
 	}
 
@@ -95,6 +91,11 @@ int main(int argc, char* argv) {
 		
 		handler3 = signal(SIGUSR2, signal_handler);
 
+		
+		void (*handler4)(int);
+		
+		handler4 = signal(SIGCHLD, signal_handler);
+
 
 		while (true) {
 
@@ -102,7 +103,6 @@ int main(int argc, char* argv) {
 
 		}
 
-		return 0;
 
 
 	}
@@ -110,9 +110,9 @@ int main(int argc, char* argv) {
 	else { //child == -1 significa que houve um erro
 
 		cout << "Ocorreu um erro na criação do processo filho. Tente novamente." << endl;
-		return;
 
 	}
 
+	return 0;
 
 }

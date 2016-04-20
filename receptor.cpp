@@ -1,4 +1,4 @@
-#include <signal.h> //signal, kill
+#include <csignal> //signal, kill
 #include <iostream> //cout, cin
 
 
