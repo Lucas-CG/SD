@@ -5,12 +5,13 @@
 #include <sstream> //criar sstream (para converter string p int)
 #include "processo.h"
 
+using namespace std;
 
 int main(int argc, char* argv[]) {
 	
 	Processo p;
 	
-	std::cout << p.get_pid() << std::endl;
+	cout << p.get_pid() << endl;
 
 	return 0;
 
