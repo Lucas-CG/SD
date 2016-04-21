@@ -7,7 +7,7 @@
 
 using namespace std;
 
-bool signal_handler(int code){
+void signal_handler(int code){
 	//modifiquei o tipo de retorno para bool para aproveitar o comportamento em demais locais
 	//adicionei o case 17 e o default (erro de digitação)	
 
@@ -18,6 +18,7 @@ bool signal_handler(int code){
 
 		case 8: //SIGFPE: floating point exception
 			//fazer algo
+			cout << "Case 8" << endl;
 			break;
 
 		case 10: //SIGUSR1: user-defined 1
@@ -38,7 +39,6 @@ bool signal_handler(int code){
 
 	}
 
-	return wrongCode;
 }
 
 
@@ -48,11 +48,12 @@ int main(int argc, char* argv) {
 	//Sinal para encerrar o processo filho: SIGCHLD (17)
 
 	//Emissor
+	
+	int signalCode = 0;
 
 	if (child > 0){
-
-		int signalCode = 0;
-		string temp;
+		
+		string temp;		
 		bool wrongCode = true;
 
 		while(wrongCode) {		
@@ -62,6 +63,8 @@ int main(int argc, char* argv) {
 			cout << "-(Digite 10) SIGUSR1 (User-Defined Signal 1);" << endl;
 			cout << "-(Digite 12) SIGUSR2 (User-Defined Signal 2);" << endl;
 			cout << "-(Digite 17) SIGCHLD (Parada de processo filho);" << endl;
+
+
 
 			getline(cin, temp);
 
@@ -80,7 +83,7 @@ int main(int argc, char* argv) {
 	
 
 	else if (child == 0) {
-
+		
 
 		void (*handler1)(int);
 		
@@ -100,8 +103,7 @@ int main(int argc, char* argv) {
 		void (*handler4)(int);
 		
 		handler4 = signal(SIGCHLD, signal_handler);
-
-
+		
 		while (true) {
 
 			int i = 1;
