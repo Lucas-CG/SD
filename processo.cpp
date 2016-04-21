@@ -11,6 +11,7 @@ using namespace std;
 Processo::Processo(){
 	//construtor
 	set_pid(getpid());
+	busyWait = false;
 }
 
 void Processo:set_pid(int id){
@@ -25,12 +26,15 @@ void Processo::signal_handler(int code){
 	switch(code){	
 
 		case 8: //SIGFPE: floating point exception
-			//fazer algo
+			//encerrar o processo
 			cout << "Case 8" << endl;
 			break;
 
-		case 10: //SIGUSR1: user-defined 1
-			//fazer algo
+		case 10: //SIGUSR1: user-defined 1: busyWait
+			busyWait = true;
+
+			//while
+
 			break;
 
 		case 12: //SIGUSR2: user-defined 2

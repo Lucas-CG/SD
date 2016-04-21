@@ -4,12 +4,13 @@
 class Processo{
 	private:
 		int pid;
+		bool busyWait;
 	public:
 		Processo(); //construtor	
-		set_pid(int id);
-		get_pid();
-		signal_handler(int code);
-		send_signal(int pid, int sign);
-		receive_signal();
+		void set_pid(int id);
+		int get_pid();
+		void signal_handler(int code);
+		void send_signal(int pid, int sign);
+		void receive_signal();
 };
 #endif
