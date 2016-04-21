@@ -7,9 +7,14 @@
 
 using namespace std;
 
-void signal_handler(int code){
+bool signal_handler(int code){
+	//modifiquei o tipo de retorno para bool para aproveitar o comportamento em demais locais
+	//adicionei o case 17 e o default (erro de digitação)	
+
+	bool wrongCode = false;
 
 	switch(code){
+		
 
 		case 8: //SIGFPE: floating point exception
 			//fazer algo
@@ -23,9 +28,17 @@ void signal_handler(int code){
 			//fazer algo
 			break;
 
+		case 17:  //SIGCHLD: Parada do processo filho
+			//fazer algo
+			break;
+
+		default:
+			cout<< "Código inválido, tente novamente." <<endl;
+			wrongCode = true;	
 
 	}
 
+	return wrongCode;
 }
 
 
@@ -40,9 +53,9 @@ int main(int argc, char* argv) {
 
 		int signalCode = 0;
 		string temp;
-		
-		while(true) {
+		bool wrongCode = true;
 
+		while(wrongCode) {		
 
 			cout << "Insira um código de sinal. Opções:" << endl;
 			cout << "-(Digite 8) SIGFPE (Floating Point Exception;" << endl;
@@ -54,16 +67,8 @@ int main(int argc, char* argv) {
 
 			signalCode = atoi(temp);
 
-			if ( (signalCode != 8) or (signalCode != 10) or (signalCode != 12) ) {
-				
-				cout << "Código inválido, tente novamente." << endl;
+			wrongCode = signal_handler(signalCode);
 
-				continue;
-			
-			}
-
-			break;
-		
 		}
 
 
