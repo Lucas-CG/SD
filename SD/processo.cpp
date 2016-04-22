@@ -66,10 +66,8 @@ void processo::signal_handler(int code) {
 }
 
 void processo::send_signal(int pid, int sinal) {
-
-    int aswer;
-
-    aswer = kill(pid, signal);
+    
+    int aswer = kill(pid, sinal);
 
     if (aswer != 0) {
         throw "Processo destino inexistente!";
@@ -77,24 +75,24 @@ void processo::send_signal(int pid, int sinal) {
 }
 
 void processo::receive_signal() {
-    void (*handler1)(int);
-
-    handler1 = signal(SIGFPE, signal_handler);
-
-
-    void (*handler2)(int);
-
-    handler2 = signal(SIGUSR1, signal_handler);
-
-
-    void (*handler3)(int);
-
-    handler3 = signal(SIGUSR2, signal_handler);
-
-
-    void (*handler4)(int);
-
-    handler4 = signal(SIGCHLD, signal_handler);
+//    void (*handler1)(int);
+//
+//    handler1 = signal(SIGFPE, signal_handler);
+//
+//
+//    void (*handler2)(int);
+//
+//    handler2 = signal(SIGUSR1, signal_handler);
+//
+//
+//    void (*handler3)(int);
+//
+//    handler3 = signal(SIGUSR2, signal_handler);
+//
+//
+//    void (*handler4)(int);
+//
+//    handler4 = signal(SIGCHLD, signal_handler);
 
 }
 

@@ -25,7 +25,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
 
-    Processo p;
+    processo p;
 
     cout << p.get_pid() << endl;
     

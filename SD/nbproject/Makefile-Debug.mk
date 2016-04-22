@@ -35,11 +35,8 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/emissor.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/processo.o \
-	${OBJECTDIR}/receptor.o \
-	${OBJECTDIR}/sinais.o
+	${OBJECTDIR}/processo.o
 
 
 # C Compiler Flags
@@ -66,11 +63,6 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sd: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/sd ${OBJECTFILES} ${LDLIBSOPTIONS}
 
-${OBJECTDIR}/emissor.o: emissor.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/emissor.o emissor.cpp
-
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -80,16 +72,6 @@ ${OBJECTDIR}/processo.o: processo.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/processo.o processo.cpp
-
-${OBJECTDIR}/receptor.o: receptor.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/receptor.o receptor.cpp
-
-${OBJECTDIR}/sinais.o: sinais.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/sinais.o sinais.cpp
 
 # Subprojects
 .build-subprojects:
