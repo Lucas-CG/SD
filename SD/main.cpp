@@ -29,6 +29,8 @@ int main(int argc, char** argv) {
 
     cout << p.get_pid() << endl;
     
+    p.send_signal(p.get_pid(), SIGCHLD);
+    
     return 0;
 }
 
