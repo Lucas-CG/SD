@@ -11,13 +11,11 @@
  * Created on April 22, 2016, 4:30 PM
  */
 
-#include <iostream>
+#include <iostream> //cout, cin
 #include <csignal> //signal, kill
 #include <stdlib.h> //atoi (string para inteiro), comando "system"
-#include <string> //strings, getline
-#include <sstream> //criar sstream (para converter string p int)
-#include <unistd.h>
 #include "processofunc.h"
+#include <string>
 
 using namespace std;
 
@@ -46,6 +44,11 @@ int main(int argc, char** argv) {
 
             case 2:
                 receive_signal();
+                
+                cout << "Escolha o tipo de espera: ocupada ou bloqueante" << endl;
+                string waitType;
+                cin >> waitType;
+                
                 break;
 
             case SIGKILL:
