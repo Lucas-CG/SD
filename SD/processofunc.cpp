@@ -17,8 +17,10 @@
 #include <string> //strings, getline
 #include <sstream> //criar sstream (para converter string p int)
 #include <unistd.h> //fork, getpid
-#include "processofunc.h"
 #include <sys/wait.h> //wait (processo filho)
+#include <climits> //INT_MAX
+
+#include "processofunc.h"
 
 using namespace std;
 
@@ -37,7 +39,7 @@ void signal_handler(int code) {
             break;
 
         case SIGUSR1: //SIGUSR1: user-defined 1: busyWait
-            cout << "oi";
+            sleep(INT_MAX);
             return;
 
             break;

@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
                 break;
 
             default:
-                cout << "Opção escolhida inexistente, tente outa vez!" << endl << endl;
+                cout << "Opção escolhida inexistente, tente outra vez!" << endl << endl;
 
         }
     }
