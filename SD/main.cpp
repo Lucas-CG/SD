@@ -16,21 +16,17 @@
 #include <stdlib.h> //atoi (string para inteiro), comando "system"
 #include <string> //strings, getline
 #include <sstream> //criar sstream (para converter string p int)
-#include "processo.h"
+#include <unistd.h>
+#include "processofunc.h"
 
 using namespace std;
 
-/*
- * 
- */
 int main(int argc, char** argv) {
 
-    processo p;
+    cout << get_pid() << endl;
+    receive_signal();
+    raise(SIGSTOP);
 
-    cout << p.get_pid() << endl;
-    
-    p.send_signal(p.get_pid(), SIGCHLD);
-    
     return 0;
 }
 
