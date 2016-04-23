@@ -40,7 +40,6 @@ void signal_handler(int code) {
 
         case SIGUSR1: //SIGUSR1: user-defined 1: busyWait
             sleep(INT_MAX);
-            return;
 
             break;
 
