@@ -23,7 +23,7 @@ using namespace std;
 
 processo::processo() {
     set_pid(getpid());
-    busyWait = false;
+    
 }
 
 processo::~processo() {
@@ -40,23 +40,22 @@ int processo::get_pid() {
 void processo::signal_handler(int code) {
     switch (code) {
 
-        case 8: //SIGFPE: floating point exception
+        case SIGFPE: //SIGFPE: floating point exception
             //encerrar o processo
             cout << "Case 8" << endl;
             break;
 
-        case 10: //SIGUSR1: user-defined 1: busyWait
-            busyWait = true;
-
+        case SIGUSR1: //SIGUSR1: user-defined 1: busyWait
+           
             //while
 
             break;
 
-        case 12: //SIGUSR2: user-defined 2
+        case SIGUSR2: //SIGUSR2: user-defined 2
             //fazer algo
             break;
 
-        case 17: //SIGCHLD: Parada do processo filho
+        case SIGCHLD: //SIGCHLD: Parada do processo filho
             //fazer algo
             break;
 
@@ -75,24 +74,24 @@ void processo::send_signal(int pid, int sinal) {
 }
 
 void processo::receive_signal() {
-//    void (*handler1)(int);
-//
-//    handler1 = signal(SIGFPE, signal_handler);
-//
-//
-//    void (*handler2)(int);
-//
-//    handler2 = signal(SIGUSR1, signal_handler);
-//
-//
-//    void (*handler3)(int);
-//
-//    handler3 = signal(SIGUSR2, signal_handler);
-//
-//
-//    void (*handler4)(int);
-//
-//    handler4 = signal(SIGCHLD, signal_handler);
+    void (*handler1)(int);
+
+    handler1 = signal(SIGFPE, this->signal_handler);
+
+
+    void (*handler2)(int);
+
+    handler2 = signal(SIGUSR1, this->signal_handler);
+
+
+    void (*handler3)(int);
+
+    handler3 = signal(SIGUSR2, this->signal_handler);
+
+
+    void (*handler4)(int);
+
+    handler4 = signal(SIGCHLD, this->signal_handler);
 
 }
 

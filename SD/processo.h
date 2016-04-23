@@ -20,12 +20,11 @@ public:
     virtual ~processo();
     void set_pid(int id);
     int get_pid();
-    void signal_handler(int code);
+    static void signal_handler(int code);
     void send_signal(int pid, int sign);
     void receive_signal();
 private:
     int pid;
-    bool busyWait;
 
 };
 

@@ -14,11 +14,11 @@ Processo::Processo(){
 	busyWait = false;
 }
 
-void Processo:set_pid(int id){
+void Processo::set_pid(int id){
 	pid = id;
 }
 
-int Processo:get_pid(){
+int Processo::get_pid(){
 	return pid;
 }
 

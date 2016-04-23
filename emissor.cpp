@@ -22,13 +22,13 @@ int main(int argc, char* argv[]) {
 
 		getline(cin, temp);
 
-		if ( (temp != "8") or (temp != "10") or (temp != "12") )
-			cout << "Código inválido, tente novamente." << endl; continue;
+		signalCode = atoi(temp);
 
-		stringstream myStream(temp);
+		if (myStream >> signalCode){
 
-		if (myStream >> signalCode)
 			cout << "inteiro inserido" << endl; break;
+			
+		}
 
 		cout << "Código inválido, tente novamente." << endl;
 
