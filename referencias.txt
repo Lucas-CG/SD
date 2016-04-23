@@ -1,0 +1,6 @@
+http://www.cplusplus.com/reference/cstdlib/rand/
+http://www.cplusplus.com/reference/cstdlib/srand/
+http://www.gnu.org/software/libc/manual/html_node/Creating-a-Pipe.html#Creating-a-Pipe
+http://linux.die.net/man/2/pipe
+http://linux.die.net/man/7/pipe
+https://en.wikipedia.org/wiki/Busy_waiting
