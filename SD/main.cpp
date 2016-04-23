@@ -15,6 +15,8 @@
 #include <csignal> //signal, kill
 #include <stdlib.h> //atoi (string para inteiro), comando "system"
 #include "processofunc.h"
+#include <climits>
+#include <unistd.h>
 #include <string>
 
 using namespace std;
@@ -33,22 +35,36 @@ int main(int argc, char** argv) {
 
         switch (c) {
             case 1:
-                int s;
-                int id;
-                cout << "Digite o pid do processo destino" << endl;
-                cin >> id;
-                cout << "Digite o tipo de sinal que deseja enviar" << endl;
-                cin >> s;
-                send_signal(id, s);
+                try {
+                    int s;
+                    int id;
+                    cout << "Digite o pid do processo destino" << endl;
+                    cin >> id;
+                    cout << "Digite o tipo de sinal que deseja enviar" << endl;
+                    cin >> s;
+                    send_signal(id, s);
+                }                catch (const char *msg) {
+                    cerr << msg << endl << endl;
+                }
                 break;
 
             case 2:
-                receive_signal();
-                
-                cout << "Escolha o tipo de espera: ocupada ou bloqueante" << endl;
-                string waitType;
+
+                cout << "Escolha o tipo de espera: 0 para ocupada ou 1 bloqueante" << endl;
+                int waitType;
                 cin >> waitType;
+
+                receive_signal();
+                if(waitType == 0){
+                    while(true){
+                        cout << "Aguardando sinal ..." << endl;                        
+                    }
+                }
+                else if(waitType == 1){                    
+                    sleep(INT_MAX);
+                }
                 
+
                 break;
 
             case SIGKILL:

@@ -23,42 +23,36 @@
 
 using namespace std;
 
-
 int get_pid() {
     return getpid();
 }
 
 void signal_handler(int code) {
-    
+
     switch (code) {
 
         case SIGFPE: //SIGFPE: floating point exception
             //encerrar o processo
-            cout << "Case 8" << endl;
+            cout << "Error: floating point exception" << endl;
             break;
 
-        case SIGUSR1: //SIGUSR1: user-defined 1: busyWait
-            sleep(INT_MAX);
-
+        case SIGUSR1: //SIGUSR1: user-defined 1: 
+            cout << "Erro desconhecido" << endl;
             break;
 
         case SIGUSR2: //SIGUSR2: user-defined 2
-            //fazer algo
-            break;
-
-        case SIGCHLD: //SIGCHLD: Parada do processo filho
-            //fazer algo
+            cout << "Abortando o programa" << endl;
             break;
 
         default:
             cout << "Código inválido, tente novamente." << endl;
-            
+
     }
-    
+
 }
 
 void send_signal(int pid, int sinal) {
-    
+
     int answer = kill(pid, sinal);
 
     if (answer != 0) {
@@ -67,6 +61,7 @@ void send_signal(int pid, int sinal) {
 }
 
 void receive_signal() {
+
     void (*handler1)(int);
 
     handler1 = signal(SIGFPE, signal_handler);
