@@ -1,3 +1,16 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/* 
+ * File:   processo.cpp
+ * Author: vinicius
+ * 
+ * Created on April 22, 2016, 5:31 PM
+ */
+
 #include <csignal> //signal, kill
 #include <iostream> //cout, cin
 #include <stdlib.h> //atoi (string para inteiro), comando "system"
@@ -8,79 +21,77 @@
 
 using namespace std;
 
-Processo::Processo(){
-	//construtor
-	set_pid(getpid());
-	busyWait = false;
+processo::processo() {
+    set_pid(getpid());
+    
 }
 
-void Processo::set_pid(int id){
-	pid = id;
+processo::~processo() {
 }
 
-int Processo::get_pid(){
-	return pid;
+void processo::set_pid(int id) {
+    processo::pid = id;
 }
 
-void Processo::signal_handler(int code){	
-	switch(code){	
-
-		case 8: //SIGFPE: floating point exception
-			//encerrar o processo
-			cout << "Case 8" << endl;
-			break;
-
-		case 10: //SIGUSR1: user-defined 1: busyWait
-			busyWait = true;
-
-			//while
-
-			break;
-
-		case 12: //SIGUSR2: user-defined 2
-			//fazer algo
-			break;
-
-		case 17:  //SIGCHLD: Parada do processo filho
-			//fazer algo
-			break;
-
-		default:
-			cout<< "Código inválido, tente novamente." <<endl;
-	}
+int processo::get_pid() {
+    return processo::pid;
 }
 
-void Processo::send_signal(int pid, int sinal){
+void processo::signal_handler(int code) {
+    switch (code) {
 
-	int aswer;
+        case SIGFPE: //SIGFPE: floating point exception
+            //encerrar o processo
+            cout << "Case 8" << endl;
+            break;
 
-	aswer =  kill(pid, sign);
+        case SIGUSR1: //SIGUSR1: user-defined 1: busyWait
+           
+            //while
 
-	if(aswer != 0){
-		throw "Processo destino inexistente!";		
-	}
+            break;
+
+        case SIGUSR2: //SIGUSR2: user-defined 2
+            //fazer algo
+            break;
+
+        case SIGCHLD: //SIGCHLD: Parada do processo filho
+            //fazer algo
+            break;
+
+        default:
+            cout << "Código inválido, tente novamente." << endl;
+    }
 }
 
-void Processo::receive_signal(){
-	void (*handler1)(int);
-		
-	handler1 = signal(SIGFPE, signal_handler);
+void processo::send_signal(int pid, int sinal) {
+    
+    int aswer = kill(pid, sinal);
+
+    if (aswer != 0) {
+        throw "Processo destino inexistente!";
+    }
+}
+
+void processo::receive_signal() {
+    void (*handler1)(int);
+
+    handler1 = signal(SIGFPE, signal_handler);
 
 
-	void (*handler2)(int);
-	
-	handler2 = signal(SIGUSR1, signal_handler);
+    void (*handler2)(int);
+
+    handler2 = signal(SIGUSR1, signal_handler);
 
 
-	void (*handler3)(int);
-	
-	handler3 = signal(SIGUSR2, signal_handler);
+    void (*handler3)(int);
 
-	
-	void (*handler4)(int);
-	
-	handler4 = signal(SIGCHLD, signal_handler);
+    handler3 = signal(SIGUSR2, signal_handler);
+
+
+    void (*handler4)(int);
+
+    handler4 = signal(SIGCHLD, signal_handler);
 
 }
 
-};

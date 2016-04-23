@@ -14,8 +14,12 @@
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>Default</name>
-                    <type>0</type>
+                    <name>Debug</name>
+                    <type>1</type>
+                </confElem>
+                <confElem>
+                    <name>Release</name>
+                    <type>1</type>
                 </confElem>
             </confList>
             <formatting>

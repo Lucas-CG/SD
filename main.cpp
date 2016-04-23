@@ -23,9 +23,41 @@ using namespace std;
 
 int main(int argc, char** argv) {
 
-    cout << get_pid() << endl;
-    receive_signal();
-    raise(SIGSTOP);
+    while (true) {
+        cout << "O pid do processo é: " << get_pid() << endl;
+        cout << "Escolha uma das opções a seguir:" << endl;
+        cout << "Para enviar sinal digite 1:" << endl;
+        cout << "Para receber sinal digite 2:" << endl;
+        cout << "Para encerrar o programa digite 9:" << endl;
+
+        int c;
+        cin >> c;
+
+        switch (c) {
+            case 1:
+                int s;
+                int id;
+                cout << "Digite o pid do processo destino" << endl;
+                cin >> id;
+                cout << "Digite o tipo de sinal que deseja enviar" << endl;
+                cin >> s;
+                send_signal(id, s);
+                break;
+
+            case 2:
+                receive_signal();
+                break;
+
+            case SIGKILL:
+                cout << "Programa encerrado" << endl;
+                raise(SIGKILL);
+                break;
+
+            default:
+                cout << "Opção escolhida inexistente, tente outa vez!" << endl << endl;
+
+        }
+    }
 
     return 0;
 }

@@ -1,55 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
-    <df root="." name="0">
-      <in>emissor.cpp</in>
-      <in>main.cpp</in>
-      <in>processo.cpp</in>
-      <in>receptor.cpp</in>
-      <in>sinais.cpp</in>
-    </df>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>processo.h</itemPath>
+      <itemPath>processofunc.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>main.cpp</itemPath>
+      <itemPath>processo.cpp</itemPath>
+      <itemPath>processofunc.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
-      <itemPath>nbproject/private/launcher.properties</itemPath>
+      <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
-  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
   <sourceRootList>
     <Elem>.</Elem>
   </sourceRootList>
-  <projectmakefile></projectmakefile>
+  <projectmakefile>Makefile</projectmakefile>
   <confs>
-    <conf name="Default" type="0">
+    <conf name="Debug" type="1">
       <toolsSet>
         <compilerSet>default</compilerSet>
-        <dependencyChecking>false</dependencyChecking>
+        <dependencyChecking>true</dependencyChecking>
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
-      <codeAssistance>
-      </codeAssistance>
-      <makefileType>
-        <makeTool>
-          <buildCommandWorkingDir>.</buildCommandWorkingDir>
-          <buildCommand>echo build</buildCommand>
-          <cleanCommand>echo clean</cleanCommand>
-          <executablePath></executablePath>
-        </makeTool>
-        <preBuild>
-          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
-          <preBuildCommand></preBuildCommand>
-        </preBuild>
-      </makefileType>
-      <item path="emissor.cpp" ex="false" tool="1" flavor2="0">
-      </item>
+      <compileType>
+      </compileType>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="processo.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="receptor.cpp" ex="false" tool="1" flavor2="0">
+      <item path="processo.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="sinais.cpp" ex="false" tool="1" flavor2="0">
+      <item path="processofunc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="processofunc.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+      </compileType>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="processo.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="processo.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="processofunc.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="processofunc.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
