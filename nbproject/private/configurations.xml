@@ -6,11 +6,15 @@
         <in>main.cpp</in>
         <in>processo.cpp</in>
         <in>processo.h</in>
+        <in>processofunc.cpp</in>
+        <in>processofunc.h</in>
       </df>
       <in>emissor.cpp</in>
       <in>main.cpp</in>
       <in>processo.cpp</in>
       <in>processo.h</in>
+      <in>processofunc.cpp</in>
+      <in>processofunc.h</in>
       <in>receptor.cpp</in>
       <in>sinais.cpp</in>
     </df>
