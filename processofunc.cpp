@@ -1,15 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   processofunc.cpp
- * Author: vinicius
- * 
- * Created on April 22, 2016, 5:31 PM
- */
 
 #include <csignal> //signal, kill
 #include <iostream> //cout, cin
@@ -42,6 +30,7 @@ void signal_handler(int code) {
 
         case SIGUSR2: //SIGUSR2: user-defined 2
             cout << "Abortando o programa" << endl;
+            raise(SIGKILL);
             break;
 
         default:

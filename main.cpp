@@ -1,16 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   main.cpp
- * Author: vinicius
- *
- * Created on April 22, 2016, 4:30 PM
- */
-
 #include <iostream> //cout, cin
 #include <csignal> //signal, kill
 #include <stdlib.h> //atoi (string para inteiro), comando "system"
@@ -23,7 +10,7 @@ using namespace std;
 
 int main(int argc, char** argv) {
 
-    while (true) {
+    while(true){
         cout << "O pid do processo é: " << get_pid() << endl;
         cout << "Escolha uma das opções a seguir:" << endl;
         cout << "Para enviar sinal digite 1:" << endl;
@@ -40,7 +27,8 @@ int main(int argc, char** argv) {
                     int id;
                     cout << "Digite o pid do processo destino" << endl;
                     cin >> id;
-                    cout << "Digite o tipo de sinal que deseja enviar" << endl;
+                    cout << "Escolha o código do sinal que deseja enviar:" << endl;
+                    cout << "SIGFPE:8"<<endl<< "SIGUSR1:10" <<endl<< "SIGUSR2:12"<<endl;
                     cin >> s;
                     send_signal(id, s);
                 }                catch (const char *msg) {
@@ -56,28 +44,27 @@ int main(int argc, char** argv) {
 
                 receive_signal();
                 if(waitType == 0){
+                    cout << "Aguardando sinal ..."<<endl;
                     while(true){
-                        cout << "Aguardando sinal ..." << endl;                        
+
                     }
                 }
                 else if(waitType == 1){                    
                     sleep(INT_MAX);
                 }
                 
-
                 break;
 
             case SIGKILL:
                 cout << "Programa encerrado" << endl;
-                raise(SIGKILL);
-                break;
+                return 0;
 
             default:
                 cout << "Opção escolhida inexistente, tente outra vez!" << endl << endl;
 
         }
-    }
 
+    }
     return 0;
 }
 
