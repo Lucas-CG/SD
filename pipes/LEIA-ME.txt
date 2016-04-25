@@ -1,0 +1,1 @@
+Esse código foi feito em c++11, logo use o script compile.sh ou adicione -std=c++11 ou -std=c++0x nos parâmetros do g++

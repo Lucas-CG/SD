@@ -1,19 +1,25 @@
-#include <cstdlib> //rand, srand, EXIT_FAILURE, EXIT_SUCCESS, atoi
+#include <cstdlib> //rand, srand, EXIT_FAILURE, EXIT_SUCCESS
 #include <time.h> //time()
-#include <iostream> //cout, cin
+#include <iostream> //std::cout, std::cin
 #include <stdio.h> // arquivos em C
 #include <unistd.h> //fork
 #include <climits> //INT_MAX
-#include <string> //Strings, obviamente
+#include <string> //std::string, std::stoi, std::to_string
+
+//Coisas a verificar: por que generateRandom está gerando números negativos?
+//                    por que o programa entra em loop quando especifico a geração de APENAS 5 números?
 
 
 using namespace std;
 
 
-int generateRandom(int &ln){ //gerando aleatórios de 0 a 2147483647 (RAND_MAX)
+int generateRandom(int &ln){ //gerando aleatórios de 1 a 2147483647 (RAND_MAX)
 
 	srand(time(NULL));
-	ln = rand() + (ln + 1);
+	ln = ( 1 + rand() ) + (ln + 1);
+
+    cout << "PRODUTOR: Número " << ln << "gerado" << endl;
+
 	return ln;
 	
 }
@@ -38,14 +44,14 @@ bool primeCheck(int n){
 	
 }
 
-int main(int argc, int * argv[]) {
+int main(int argc, char * argv[]) {
     
     int pipeFileDescriptors[2];
     char buffer[100];
     
     if (argc != 2) {
         
-        cout << Uso: << argv[0] << " [quantidade de números a ser gerada]" << endl;
+        cout << "Uso: " << argv[0] << " [quantidade de números a ser gerada]" << endl;
         
         return EXIT_FAILURE;
         
@@ -53,8 +59,8 @@ int main(int argc, int * argv[]) {
     
     if (pipe(pipeFileDescriptors) == -1){
         
-        //deu ruim no pipe
-        perror("Erro na criação do pipe!") //imprime a mensagem de erro
+        //erro no pipe
+        perror("Erro na criação do pipe!"); //imprime a mensagem de erro
         return EXIT_FAILURE;
         
     }
@@ -74,19 +80,19 @@ int main(int argc, int * argv[]) {
         
     }
     
-    if (pid == 0) { //esse é o filho -> consumidor
+    if (pid == 0) { //processo filho -> CONSUMIDOR
     
-        close(pipeFileDescriptors[1]); //Fecha o lado de ESCRITA (não usado)
+        close(pipeFileDescriptors[1]); //Fecha o lado do pipe de ESCRITA (não usado)
         
         while (true) {
             
             read(pipeFileDescriptors[0], &buffer, 100);
             
-            string receivedMessage = buffer;
+            const string receivedMessage = buffer;
         
-            int receivedValue = atoi(receivedMessage);
+            int receivedValue = stoi(receivedMessage);
             
-            cout << "Número " << receivedValue << "recebido." << endl;
+            cout << "CONSUMIDOR: Número " << receivedValue << " recebido." << endl;
             
             if (receivedValue == 0)
                 
@@ -99,18 +105,18 @@ int main(int argc, int * argv[]) {
             
             if (receivedValueIsPrime)
             
-                cout << receivedValue << " é primo." << endl;
+                cout << "CONSUMIDOR: " << receivedValue << " é primo." << endl;
             
             else
             
-                cout << receivedValue << " não é primo" << endl;
+                cout << "CONSUMIDOR: " << receivedValue << " não é primo" << endl;
             
         
         }
         
         //Finalizando o programa (recebeu 0)
         close(pipeFileDescriptors[0]); //Fecha o lado de LEITURA após o fim da operação
-        cout << "Consumidor encerrado."
+        cout << "CONSUMIDOR: Encerrado." << endl;
         return EXIT_SUCCESS;
         
     }
@@ -120,35 +126,45 @@ int main(int argc, int * argv[]) {
         close(pipeFileDescriptors[0]); //Fecha o lado de LEITURA (não usado)
         
         int minForRandom = 0;
+
+        const string argument = argv[1];
+        int generatedAmount = stoi(argument);
         
-        for (int i = 0; i < argv[1]; i++) { //argv[1] é a quantidade de números a ser gerada,
+        for (int i = 0; i < generatedAmount; i++) { //argv[1] é a quantidade de números a ser gerada,
         //passada como argumento
             
             int numberToBeSent = generateRandom(minForRandom);
             
-            string sentMessage = to_string(numberTobeSent);
+            string printedMessage = to_string(numberToBeSent);
+
+            const char* sentMessage = printedMessage.c_str(); //convertendo para string do C
+
+
+            cout << "PRODUTOR: Enviando o número " << printedMessage << endl;
             
-            cout << "Enviando o número " << sentMessage << endl;
+            write(pipeFileDescriptors[1], sentMessage, printedMessage.size() + 1);
+
+            //+1: byte NULL adicional no fim de strings do C
             
-            write(pipeFileDescriptors[1], sentMessage, sentMessage.size() + 1); //ver se é realmente necessário o +1 (caractere EOF?)
-            
-            cout << "Número " << sentMessage << " enviado" << endl;
+            cout << "PRODUTOR: Número " << printedMessage << " enviado" << endl;
             
         }
         
         
         
-        cout << "Fim da geração de números aleatórios. Enviando 0." << endl;
+        cout << "PRODUTOR: Fim da geração de números aleatórios. Enviando 0." << endl;
         
-        string sentZero = "0";
+        string zeroString = "0";
+
+        const char* sentZero = zeroString.c_str();
         
-        write(pipeFileDescriptors[1], sentZero, sentZero.size() + 1);
+        write(pipeFileDescriptors[1], sentZero, zeroString.size() + 1);
         
-        cout << "Zero enviado." << endl;
+        cout << "PRODUTOR: Zero enviado." << endl;
         
         close(pipeFileDescriptors[1]);
         
-        cout << "Produtor encerrado." << endl;
+        cout << "PRODUTOR: Encerrado." << endl;
         
         return EXIT_SUCCESS;
         
