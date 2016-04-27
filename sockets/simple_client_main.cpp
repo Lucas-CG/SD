@@ -44,6 +44,9 @@ int main ( int argc, char* argv[] )
 
       cout << reply << endl;
     }
+
+    client_socket << "0";
+    client_socket >> reply;
 	}
       catch ( SocketException& ) {}
 
