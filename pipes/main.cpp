@@ -4,27 +4,27 @@
 #include <stdio.h> // arquivos em C
 #include <unistd.h> //fork
 #include <climits> //INT_MAX
-#include <string> //std::string, std::stoi, std::to_string
-
-//Coisas a verificar: por que generateRandom está gerando números negativos?
-//                    por que o programa entra em loop quando especifico a geração de APENAS 5 números?
+#include <string> //std::string, std::stoi, std::stoull, std::to_string
 
 
 using namespace std;
 
 
-int generateRandom(int &ln){ //gerando aleatórios de 1 a 2147483647 (RAND_MAX)
-
+unsigned long long int generateRandomNumber(unsigned long long int &ln)
+{
 	srand(time(NULL));
-	ln = ( 1 + rand() ) + (ln + 1);
-
-    cout << "PRODUTOR: Número " << ln << "gerado" << endl;
-
-	return ln;
-	
+    unsigned long long int randomNumber1 = abs(rand());
+    unsigned long long int randomNumber2 = abs(rand());
+    randomNumber1 = randomNumber1 << (sizeof(int)*8);   
+    unsigned long long int resultRandomNumber = (randomNumber1 | randomNumber2) + ln;   
+    ln = resultRandomNumber;
+    
+    return resultRandomNumber;
 }
 
-bool primeCheck(int n){
+
+
+bool primeCheck(unsigned long long n){
 
 	int k = 0;
 	
@@ -47,7 +47,7 @@ bool primeCheck(int n){
 int main(int argc, char * argv[]) {
     
     int pipeFileDescriptors[2];
-    char buffer[100];
+    char buffer[64];
     
     if (argc != 2) {
         
@@ -86,15 +86,15 @@ int main(int argc, char * argv[]) {
         
         while (true) {
             
-            read(pipeFileDescriptors[0], &buffer, 100);
+            read(pipeFileDescriptors[0], &buffer, 65);
             
             const string receivedMessage = buffer;
         
-            int receivedValue = stoi(receivedMessage);
+            unsigned long long int receivedValue = stoull(receivedMessage);
             
             cout << "CONSUMIDOR: Número " << receivedValue << " recebido." << endl;
             
-            if (receivedValue == 0)
+            if (receivedMessage == "0")
                 
                 break;
 
@@ -125,17 +125,17 @@ int main(int argc, char * argv[]) {
         
         close(pipeFileDescriptors[0]); //Fecha o lado de LEITURA (não usado)
         
-        int minForRandom = 0;
+        unsigned long long int minForRandom = 0;
 
-        const string argument = argv[1];
+        const string argument = argv[1]; //argv[1] é a quantidade de números a ser gerada,
         int generatedAmount = stoi(argument);
         
         for (int i = 0; i < generatedAmount; i++) { //argv[1] é a quantidade de números a ser gerada,
         //passada como argumento
             
-            int numberToBeSent = generateRandom(minForRandom);
+            unsigned long long int numberToBeSent = generateRandomNumber(minForRandom);
             
-            string printedMessage = to_string(numberToBeSent);
+            string printedMessage = to_string(numberToBeSent); //funciona para unsigned long long int!
 
             const char* sentMessage = printedMessage.c_str(); //convertendo para string do C
 
@@ -147,6 +147,8 @@ int main(int argc, char * argv[]) {
             //+1: byte NULL adicional no fim de strings do C
             
             cout << "PRODUTOR: Número " << printedMessage << " enviado" << endl;
+
+            sleep(1);
             
         }
         
