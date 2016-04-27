@@ -50,10 +50,10 @@ int main ( int argc, char* argv[] )
 		  unsigned long long int receivedValue = std::stoull(data);
 
 		  if(primeCheck(receivedValue)){
-		  	data = "É primo!";
+		  	data += " É primo!";
 		  }
 		  else{
-		  	data = "Não é primo!";
+		  	data += " Não é primo!";
 		  }
 		  new_sock << data;
 		}

@@ -34,7 +34,7 @@ int main ( int argc, char* argv[] )
 	{
     unsigned long long int minForRandom = 0;
     //gera numeros aleatórios e envia
-    for(int i= 0; i< 5; i++){      
+    for(int i= 0; i< 200; i++){      
       unsigned long long int numbeToBeSent = generateRandomNumber(minForRandom);
 
       string printedMessage = to_string(numbeToBeSent);
