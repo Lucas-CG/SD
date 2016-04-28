@@ -1,5 +1,5 @@
 #include <cstdlib> //rand, srand, EXIT_FAILURE, EXIT_SUCCESS
-#include <time.h> //time()
+#include <ctime> //time()
 #include <iostream> //std::cout, std::cin
 #include <stdio.h> // arquivos em C
 #include <unistd.h> //fork

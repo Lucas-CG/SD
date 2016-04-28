@@ -2,7 +2,7 @@
 #include "SocketException.h"
 #include <iostream> //std::cout
 #include <string> //std::string, std::to_string
-#include <time.h> //time()
+#include <ctime> //time()
 #include <cstdlib> //rand, srand, EXIT_FAILURE, EXIT_SUCCESS
 
 using namespace std;
