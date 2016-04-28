@@ -3,7 +3,6 @@
 #include <iostream> //std::cout, std::cin
 #include <stdio.h> // arquivos em C
 #include <unistd.h> //fork
-#include <climits> //INT_MAX
 #include <string> //std::string, std::stoi, std::stoull, std::to_string
 
 
