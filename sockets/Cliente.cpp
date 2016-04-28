@@ -31,7 +31,7 @@ unsigned long long int generateRandomNumber(unsigned long long int &ln) {
 
 int main ( int argc, char* argv[] )
 {
-  try {
+  try {      
 
       ClientSocket client_socket ( "localhost", 30000 );
 
@@ -42,7 +42,6 @@ int main ( int argc, char* argv[] )
         unsigned long long int minForRandom = 0;
 
         //gera numeros aleatórios e envia
-
         for(int i = 0; i < 200; i++){  
 
           unsigned long long int numberToBeSent = generateRandomNumber(minForRandom);
@@ -63,7 +62,7 @@ int main ( int argc, char* argv[] )
 
       catch ( SocketException& ) {}
 
-      cout << "Resposta recebida do servidor:\n\"" << reply << "\"\n";;
+      cout << "Resposta recebida do servidor:\n\"" << answer << "\"\n";;
 
   }
 
