@@ -72,8 +72,6 @@ int main(int argc, char * argv[]) {
     
     if(pid == -1) {
         
-        //que bad...
-        
         perror("Erro na criação do fork!");
         return EXIT_FAILURE;
         
@@ -126,17 +124,19 @@ int main(int argc, char * argv[]) {
         
         unsigned long long int minForRandom = 0;
 
-        const string argument = argv[1]; //argv[1] é a quantidade de números a ser gerada,
+        //argv[1] (argumento) é a quantidade de números a ser gerada
+        const string argument = argv[1];
+
         int generatedAmount = stoi(argument);
         
-        for (int i = 0; i < generatedAmount; i++) { //argv[1] é a quantidade de números a ser gerada,
-        //passada como argumento
-            
+        for (int i = 0; i < generatedAmount; i++) {
+                    
             unsigned long long int numberToBeSent = generateRandomNumber(minForRandom);
             
-            string printedMessage = to_string(numberToBeSent); //funciona para unsigned long long int!
+            string printedMessage = to_string(numberToBeSent);
 
-            const char* sentMessage = printedMessage.c_str(); //convertendo para string do C
+            //convertendo para string do C
+            const char* sentMessage = printedMessage.c_str();
 
 
             cout << "PRODUTOR: Enviando o número " << printedMessage << endl;
