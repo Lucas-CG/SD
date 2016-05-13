@@ -18,12 +18,21 @@
 //From c++14: chrono_literals
 
 
+//spinlock functions
+
+void acquire(std::atomic_flag & flag) { while(flag.test_and_set()) {} } //busy wait
+
+void release(std::atomic_flag & flag) {flag.clear();}
+
 
 std::vector<int8_t> generateRandomVector(unsigned long int vectorSize) {
 
 	srand(time(NULL));
 
 	std::vector<int8_t> ret;
+	
+
+	//allocating necessary space (avoids reallocating after insertion of elements)
 
 	ret.reserve(vectorSize);
 
@@ -48,15 +57,16 @@ void parallelSum(std::vector<int8_t> & vec, unsigned long int first, unsigned lo
 
 	//critical section begin
 
-	while(flag.test_and_set()) {} //same as acquire, with busy wait
+	acquire(flag);
 
 	counter += sum;
 
-	flag.clear(); //same as release
+	release(flag);
 
 	//critical section end
 
 }
+
 
 
 int main(int argc, char** argv) {
@@ -79,8 +89,16 @@ int main(int argc, char** argv) {
 
 	unsigned long int numbersAmount = stoul(argument2);
 
+	
+	//Starting time measurement for vector generation
+
+	auto vectorStartTime = std::chrono::steady_clock::now();
 
 	std::vector<int8_t> numbers = generateRandomVector(numbersAmount);
+
+	auto vectorEndTime = std::chrono::steady_clock::now(); //end of vector generation
+
+	std::cout << "Tempo de geração do vetor: " << std::chrono::duration_cast<decltype(1ms)>(vectorEndTime - vectorStartTime).count() << " ms" << std::endl;
 	
 
 	//Catching thread number (first argument)
@@ -92,14 +110,15 @@ int main(int argc, char** argv) {
 
 	//deciding the amount of elements for each thread
 
-
 	unsigned long int partSize = (numbersAmount + numThreads - 1) / numThreads;
 
 	std::vector<std::thread> threads;
 
+
 	//getting time for the start
 
 	auto startTime = std::chrono::steady_clock::now();
+
 
 	//Thread creation
 
