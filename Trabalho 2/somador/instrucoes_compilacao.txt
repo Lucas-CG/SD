@@ -1,0 +1,3 @@
+Para compilar, basta executar qualquer um dos dois scripts de compilação, a depender do compilador desejado.
+Pode-se adicionar flags de compilação como argumentos para o script.
+O compilador deve ter suporte a c++14 (g++ versão >= 4.9)

@@ -25,6 +25,19 @@ void acquire(std::atomic_flag & flag) { while(flag.test_and_set()) {} } //busy w
 void release(std::atomic_flag & flag) {flag.clear();}
 
 
+//print vector for debug
+
+void printVector(std::vector<int8_t> & vec, unsigned long int numElements) {
+
+	for (unsigned long int i = 0; i < numElements; i++) {
+
+		std::cout << static_cast<int>(vec.at(i)) << std::endl;
+		//static_cast because cout treats int8_t as char
+
+	}
+
+}
+
 std::vector<int8_t> generateRandomVector(unsigned long int vectorSize) {
 
 	srand(time(NULL));
@@ -100,6 +113,7 @@ int main(int argc, char** argv) {
 
 	std::cout << "Tempo de geração do vetor: " << std::chrono::duration_cast<decltype(1ms)>(vectorEndTime - vectorStartTime).count() << " ms" << std::endl;
 	
+	//printVector(numbers, numbersAmount); //for debugging
 
 	//Catching thread number (first argument)
 

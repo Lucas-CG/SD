@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ -std=c++14 -pthread somador.cpp -o somador
+g++ -std=c++14 -pthread $1 somador.cpp -o somador
