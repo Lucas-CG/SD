@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ -std=c++14 -pthread main.cpp -o main
+g++ -O3 -std=c++14 -pthread main.cpp -o main

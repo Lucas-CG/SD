@@ -8,6 +8,7 @@
 #include <string>			//std::string
 #include <chrono>			//std::chrono
 #include <functional>		//std::ref
+#include <cmath>
 
 //semaphore for ME of the vector numbers
 sem_t mutex;
@@ -33,7 +34,7 @@ bool primeCheck(unsigned int n){
 
 	int k = 0;
 	
-	for(int i = 1; i < n/2; i++){
+	for(int i = 1; i < std::sqrt(n); i++){
 	    
 		if(k > 1)
 		
@@ -56,6 +57,7 @@ void producer (std::vector<unsigned int> & vec, int M, int & m){
 		sem_wait(&isEmpty);
 		sem_wait(&mutex);	
 		if(m >= M){
+			sem_post(&isEmpty);
 			sem_post(&mutex);
 			break;
 		}		
@@ -77,6 +79,7 @@ void consumer(std::vector<unsigned int> & vec, int M, int & m){
 		sem_wait(&isFull);
 		sem_wait(&mutex);
 		if(m >= M){
+			sem_post(&isFull);
 			sem_post(&mutex);
 			break;
 		} 	
