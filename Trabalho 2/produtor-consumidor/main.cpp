@@ -52,14 +52,16 @@ bool primeCheck(unsigned int n){
 
 void producer (std::vector<unsigned int> & vec, int M, int & m){
 	while(1){				
-		//critical session begin		
+		//critical session begin				
 		sem_wait(&isEmpty);
 		sem_wait(&mutex);	
-		if(m >= M) break;		
+		if(m >= M){
+			sem_post(&mutex);
+			break;
+		}		
 		for (unsigned long int i = 0; i < vec.size(); i++){
 			if(vec[i] == 0){					
 				vec[i] = generateRandomNumber();
-				std::cout << vec[i] << std::endl;
 				break;
 			}				
 		}	
@@ -74,7 +76,10 @@ void consumer(std::vector<unsigned int> & vec, int M, int & m){
 		//critical session begin
 		sem_wait(&isFull);
 		sem_wait(&mutex);
-		if(m >= M) break;	
+		if(m >= M){
+			sem_post(&mutex);
+			break;
+		} 	
 		for (unsigned long int i = 0; i < vec.size(); i++){
 			if(vec[i] != 0){
 				std::cout << "O número "<<vec[i]<<" é primo: "<< primeCheck(vec[i])<< std::endl;
@@ -157,7 +162,6 @@ int main(int argc, char** argv) {
 
 	//getting time for the end
 	auto endTime = std::chrono::steady_clock::now();
-
 
 	//note that 1ms is a literal defined in <chrono>
 
