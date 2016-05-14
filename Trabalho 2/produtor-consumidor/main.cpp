@@ -24,6 +24,7 @@ unsigned int generateRandomNumber()
     unsigned int resultRandomNumber = (rand() % 10000000);      
     
     return resultRandomNumber;
+
 }
 
 
