@@ -49,15 +49,16 @@ bool primeCheck(unsigned int n){
 }
 
 
-void producer (std::vector<unsigned int> & vec,int id){
-	while(1){
-		unsigned int randomNumber = generateRandomNumber();
-		//critical session begin
+void producer (std::vector<unsigned int> & vec, int M, int & m){
+	while(1){				
+		//critical session begin		
 		sem_wait(&isEmpty);
 		sem_wait(&mutex);	
+		if(m >= M) break;		
 		for (unsigned long int i = 0; i < vec.size(); i++){
-			if(vec[i] == 0){
-				vec[i] = randomNumber;
+			if(vec[i] == 0){					
+				vec[i] = generateRandomNumber();
+				std::cout << vec[i] << std::endl;
 				break;
 			}				
 		}	
@@ -67,20 +68,24 @@ void producer (std::vector<unsigned int> & vec,int id){
 	}
 }
 
-void consumer(std::vector<unsigned int> & vec){
+void consumer(std::vector<unsigned int> & vec, int M, int & m){
 	while(1){
-	//critical session begin
-	sem_wait(&isFull);
-	sem_wait(&mutex);	
-	for (unsigned long int i = 0; i < vec.size(); i++){
-		if(vec[i] != 0){
-			std::cout << "O número "<<v[i]<<" é primo: "<< primeCheck(vec[i])<< std::endl;
-		}				
-	}	
-	//critical session ends
-	sem_post(&mutex);
-	sem_post(&isEmpty);
-}
+		//critical session begin
+		sem_wait(&isFull);
+		sem_wait(&mutex);
+		if(m >= M) break;	
+		for (unsigned long int i = 0; i < vec.size(); i++){
+			if(vec[i] != 0){
+				std::cout << "O número "<<vec[i]<<" é primo: "<< primeCheck(vec[i])<< std::endl;
+				vec[i] = 0;
+				break;
+			}				
+		}
+		m++;
+		//critical session ends
+		sem_post(&mutex);
+		sem_post(&isEmpty);
+	}
 }
 
 
@@ -124,21 +129,23 @@ int main(int argc, char** argv) {
 	sem_init(&isFull,0,0);
 	sem_init(&isEmpty,0,N);
 
+	int m = 0;
+
 	//getting time for the start
 	auto startTime = std::chrono::steady_clock::now();
 
 	//Producers Threads creation
 	std::cout << "inserting producers threads" << std::endl;	
 	for (int i = 0; i < numThreadsProducers; i++) {		
-		threads.push_back( std::thread(producer, std::ref(randomNumberVector),i));
+		threads.push_back( std::thread(producer, std::ref(randomNumberVector),M, std::ref(m)));
 	}
 
 	//Consumers Threads creation
 	std::cout << "inserting consumers threads" << std::endl;
 	for (int i = 0; i < numThreadsConsumers; i++) {
-		threads.push_back( std::thread(consumer, std::ref(randomNumberVector)));
+		threads.push_back( std::thread(consumer, std::ref(randomNumberVector), M, std::ref(m)));
 	}
-		
+
 	//wait for the threads to complete. Main blocks
 	for(auto& th : threads) th.join();
 
