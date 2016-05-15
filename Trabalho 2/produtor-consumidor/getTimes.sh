@@ -1,4 +1,4 @@
-for i in 1 2 3 4 5
+for i in 1 2 3 4 5 6 7 8 9 10
 do
 	./main 2 1 1 10000 | grep "Tempo" >> 211.txt
 	./main 2 2 2 10000 | grep "Tempo" >> 222.txt
