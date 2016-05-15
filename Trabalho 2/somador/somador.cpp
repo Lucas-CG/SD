@@ -161,7 +161,6 @@ int main(int argc, char** argv) {
 	auto endTime = std::chrono::steady_clock::now();
 
 
-	//note that 1ms is a literal defined in <chrono>
 
 	std::cout << "Resultado: " << result << std::endl;
 
