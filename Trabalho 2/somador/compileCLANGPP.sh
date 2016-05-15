@@ -1,3 +1,3 @@
 #!/bin/bash
 
-clang++ -std=c++14 -pthread $1 somador.cpp -o somador
+clang++ -std=c++11 -pthread $1 somador.cpp -o somador

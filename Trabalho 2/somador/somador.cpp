@@ -15,8 +15,6 @@
 //From c++11: std::thread, std::vector, std::array, std::atomic_flag,
 //std::chrono, auto, decltype, std::ref, int8_t
 
-//From c++14: chrono_literals
-
 
 //spinlock functions
 
@@ -85,12 +83,10 @@ void parallelSum(std::vector<int8_t> & vec, unsigned long int first, unsigned lo
 int main(int argc, char** argv) {
 
 
-	using namespace std::literals; //to use 1ms
-
 
     if (argc != 3) {
 
-       	cout << "Uso: " << argv[0] << " [número de threads] [tamanho do vetor]" <$
+       	std::cout << "Uso: " << argv[0] << " [número de threads] [tamanho do vetor]" << std::endl;
        	
         return EXIT_FAILURE;
        	
@@ -120,7 +116,7 @@ int main(int argc, char** argv) {
 
 	auto vectorEndTime = std::chrono::steady_clock::now(); //end of vector generation
 
-	std::cout << "Tempo de geração do vetor: " << std::chrono::duration_cast<decltype(1ms)>(vectorEndTime - vectorStartTime).count() << " ms" << std::endl;
+	std::cout << "Tempo de geração do vetor: " << std::chrono::duration<double, std::milli>(vectorEndTime - vectorStartTime).count() << " ms" << std::endl;
 	
 	//printVector(numbers, numbersAmount); //for debugging
 
@@ -169,7 +165,7 @@ int main(int argc, char** argv) {
 
 	std::cout << "Resultado: " << result << std::endl;
 
-	std::cout << "Tempo de execução: " << std::chrono::duration_cast<decltype(1ms)>(endTime - startTime).count() << " ms" << std::endl;
+	std::cout << "Tempo de execução: " << std::chrono::duration<double, std::milli>(endTime - startTime).count() << " ms" << std::endl;
 
 
 	return 0;
