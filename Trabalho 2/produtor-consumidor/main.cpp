@@ -12,16 +12,14 @@
 
 //semaphore for ME of the vector numbers
 sem_t mutex;
-//semaphore for ME for M number consumed
-sem_t mutexMNumbers;
 //semaphore for checking if the vector number is full
 sem_t isFull;
 //semaphore for checking if the vector number is empty
 sem_t isEmpty;
 
-unsigned int generateRandomNumber(int threadID, int numThreads)
+unsigned int generateRandomNumber(int i, int numThreads)
 {
-	srand( ( threadID * time(NULL) ) / numThreads  );
+	srand( ( i * time(NULL) ) / numThreads  );
     unsigned int resultRandomNumber = (rand() % 10000000);      
     
     return resultRandomNumber;
@@ -51,7 +49,7 @@ bool primeCheck(unsigned int n){
 }
 
 
-void producer (std::vector<unsigned int> & vec, int i, int npt, int M, int & m){
+void producer (std::vector<unsigned int> & vec, int npt, int M, int & m){
 	while(1){				
 		//critical session begin				
 		sem_wait(&isEmpty);
@@ -137,7 +135,6 @@ int main(int argc, char** argv) {
 	}
 
 	sem_init(&mutex,0,1);
-	sem_init(&mutexMNumbers,0,1);
 	sem_init(&isFull,0,0);
 	sem_init(&isEmpty,0,N);
 
@@ -149,7 +146,7 @@ int main(int argc, char** argv) {
 	//Producers Threads creation
 	std::cout << "inserting producers threads" << std::endl;	
 	for (int i = 0; i < numThreadsProducers; i++) {		
-		threads.push_back( std::thread(producer, std::ref(randomNumberVector),i,numThreadsProducers,M, std::ref(m)));
+		threads.push_back( std::thread(producer, std::ref(randomNumberVector),numThreadsProducers,M, std::ref(m)));
 	}
 
 	//Consumers Threads creation
@@ -162,7 +159,6 @@ int main(int argc, char** argv) {
 	for(auto& th : threads) th.join();
 
 	sem_destroy(&mutex);
-	sem_destroy(&mutexMNumbers);
 	sem_destroy(&isFull);
 	sem_destroy(&isEmpty);
 
