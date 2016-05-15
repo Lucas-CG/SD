@@ -61,10 +61,12 @@ void producer (std::vector<unsigned int> & vec, int i, int npt, int M, int & m){
 			sem_post(&mutex);
 			break;
 		}	
-		unsigned int randomNumber = generateRandomNumber(i,npt);	
+			
 		for (unsigned long int i = 0; i < vec.size(); i++){
 			if(vec[i] == 0){					
+				unsigned int randomNumber = generateRandomNumber(i,npt);
 				vec[i] = randomNumber;
+				std::cout << "numero " << randomNumber << " gerado" << std::endl;
 				break;
 			}				
 		}	
