@@ -20,9 +20,9 @@
 
 //spinlock functions
 
-void acquire(std::atomic_flag & flag) { while(flag.test_and_set()) {} } //busy wait
+inline void acquire(std::atomic_flag & flag) { while(flag.test_and_set()) {} } //busy wait
 
-void release(std::atomic_flag & flag) {flag.clear();}
+inline void release(std::atomic_flag & flag) {flag.clear();}
 
 
 //print vector for debug
@@ -86,6 +86,15 @@ int main(int argc, char** argv) {
 
 
 	using namespace std::literals; //to use 1ms
+
+
+    if (argc != 3) {
+
+       	cout << "Uso: " << argv[0] << " [número de threads] [tamanho do vetor]" <$
+       	
+        return EXIT_FAILURE;
+       	
+    }
 
 
 	//Creating a lock
