@@ -168,8 +168,8 @@ int main(int argc, char** argv) {
 
 	//note that 1ms is a literal defined in <chrono>
 
-	std::cout << "Tempo de execução: " << std::chrono::duration_cast<decltype(1ms)>(endTime - startTime).count() << " ms" << std::endl;
-
+	std::cout << "Tempo de execução: " << std::chrono::duration<double, std::milli>(endTime - startTime).count() << " ms" << std::endl;
+	
 	return 0;
 
 }
