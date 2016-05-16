@@ -35,7 +35,7 @@ for compiler in GPP CLANGPP; do
 
 						fi
 
-						echo $i $j $(./calculateAverages.exe Logs_$compiler$optimizationFlag/times.$i.$j.txt) >> Logs_$compiler$optimizationFlag/averages.txt
+						echo $i,$j,$(./calculateAverages.exe Logs_$compiler$optimizationFlag/times.$i.$j.txt) >> Logs_$compiler$optimizationFlag/averages$compiler$optimizationFlag.csv
 
 					fi
 
