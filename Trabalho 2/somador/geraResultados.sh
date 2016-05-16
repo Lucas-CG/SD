@@ -19,6 +19,10 @@ for compiler in GPP CLANGPP; do
 
 					cat Logs_$compiler$optimizationFlag/$i.$j.$k.txt | grep "execução" | awk '{print $4}' >> Logs_$compiler$optimizationFlag/times.$i.$j.txt
 
+					#tempo para liberar a memória
+
+					sleep 2
+
 					if [[ $k -eq 10 ]]; then
 
 						#calcular médias
