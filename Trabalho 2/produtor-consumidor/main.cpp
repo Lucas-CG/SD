@@ -50,7 +50,9 @@ bool primeCheck(unsigned int n){
 
 
 void producer (std::vector<unsigned int> & vec, int npt, int M, int & m){
-	while(1){				
+	while(1){		
+		unsigned int k = rand() % 10000;				
+		unsigned int randomNumber = generateRandomNumber(k,npt);			
 		//critical session begin				
 		sem_wait(&isEmpty);
 		sem_wait(&mutex);	
@@ -59,12 +61,9 @@ void producer (std::vector<unsigned int> & vec, int npt, int M, int & m){
 			sem_post(&isFull);		
 			sem_post(&mutex);
 			break;
-		}	
-			
+		}			
 		for (unsigned long int i = 0; i < vec.size(); i++){
-			if(vec[i] == 0){	
-				unsigned int k = rand() % 10000;				
-				unsigned int randomNumber = generateRandomNumber(k,npt);
+			if(vec[i] == 0){					
 				vec[i] = randomNumber;
 				break;
 			}				
