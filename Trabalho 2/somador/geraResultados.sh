@@ -27,7 +27,7 @@ for compiler in GPP CLANGPP; do
 
 						#calcular médias
 
-						if [[ $(ls | grep calculateAverages.exe) -eq "" ]]; then
+						if [[ $(ls | grep calculateAverages) -eq "" ]]; then
 
 							#se o calculador de médias não foi compilado...
 						
@@ -35,7 +35,7 @@ for compiler in GPP CLANGPP; do
 
 						fi
 
-						echo $i,$j,$(./calculateAverages.exe Logs_$compiler$optimizationFlag/times.$i.$j.txt) >> Logs_$compiler$optimizationFlag/averages$compiler$optimizationFlag.csv
+						echo $i,$j,$(./calculateAverages Logs_$compiler$optimizationFlag/times.$i.$j.txt) >> Logs_$compiler$optimizationFlag/averages$compiler$optimizationFlag.csv
 
 					fi
 
