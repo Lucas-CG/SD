@@ -17,7 +17,7 @@ sem_t isFull;
 //semaphore for checking if the vector number is empty
 sem_t isEmpty;
 
-unsigned int generateRandomNumber(int i, int numThreads)
+inline unsigned int generateRandomNumber(int i, int numThreads)
 {
 	srand( ( i * time(NULL) ) / numThreads  );
     unsigned int resultRandomNumber = (rand() % 10000000);      
