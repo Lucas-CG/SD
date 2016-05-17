@@ -166,6 +166,7 @@ int main(int argc, char** argv) {
 
 	std::cout << "Tempo de execução: " << std::chrono::duration<double, std::milli>(endTime - startTime).count() << " ms" << std::endl;
 
+	std::cout << "Tempo total: " << std::chrono::duration<double, std::milli>(endTime - startTime + vectorEndTime - vectorStartTime).count() << " ms" << std::endl;
 
 	return 0;
 
