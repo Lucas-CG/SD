@@ -1,0 +1,4 @@
+Tempo de geração do vetor: 211838 ms
+Resultado: -4708500
+Tempo de execução: 262469 ms
+Tempo total: 474306 ms
