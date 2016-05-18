@@ -1,0 +1,10 @@
+Tempo de execução: 158.771 ms
+Tempo de execução: 157.255 ms
+Tempo de execução: 161.079 ms
+Tempo de execução: 160.873 ms
+Tempo de execução: 159.875 ms
+Tempo de execução: 160.14 ms
+Tempo de execução: 64.906 ms
+Tempo de execução: 62.89 ms
+Tempo de execução: 162.29 ms
+Tempo de execução: 61.824 ms
