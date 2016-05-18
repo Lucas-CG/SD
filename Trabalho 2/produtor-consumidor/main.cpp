@@ -90,8 +90,6 @@ void consumer(std::vector<unsigned int> & vec, int M, int & m){
 
 int main(int argc, char** argv) {
 
-	using namespace std::literals; //to use 1ms
-
 	//catching first argument (size of integer numbers vector)
 	const std::string argument1 = argv[1];
 	unsigned long int N = stoi(argument1);
@@ -155,8 +153,6 @@ int main(int argc, char** argv) {
 
 	//getting time for the end
 	auto endTime = std::chrono::steady_clock::now();
-
-	//note that 1ms is a literal defined in <chrono>
 
 	std::cout << "Tempo de execução: " << std::chrono::duration<double, std::milli>(endTime - startTime).count() << " ms" << std::endl;
 	
