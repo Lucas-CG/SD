@@ -11,9 +11,9 @@ O algoritmo usado para gerar o vetor de forma paralela para testes está na past
 O algoritmo para gerar o vetor de forma paralela funciona da seguinte forma:
 <ol>
 
-	<li>Obtenção do número de *threads* máximo suportado pelo processador.</li>
-	<li>Geração de uma quantidade de *threads* (nthreads) igual ao número obtido no passo anterior. As *threads* apontam para as nthreads primeiras posições (contíguas) do vetor.</li>
-	<li>Cada *thread* gera um número aleatório, insere na posição alocada a ela e se move para nthreads posições à frente, até chegar ao fim do vetor.</li>
+	<li>Obtenção do número de _threads_ máximo suportado pelo processador.</li>
+	<li>Geração de uma quantidade de _threads_ (nthreads) igual ao número obtido no passo anterior. As _threads_ apontam para as nthreads primeiras posições (contíguas) do vetor.</li>
+	<li>Cada _thread_ gera um número aleatório, insere na posição alocada a ela e se move para nthreads posições à frente, até chegar ao fim do vetor.</li>
 
 </ol>
 
