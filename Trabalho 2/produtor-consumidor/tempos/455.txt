@@ -1,10 +1,10 @@
-Tempo de execução: 256.035 ms
-Tempo de execução: 248.46 ms
-Tempo de execução: 253.288 ms
-Tempo de execução: 247.648 ms
-Tempo de execução: 253.771 ms
-Tempo de execução: 254.239 ms
-Tempo de execução: 104.978 ms
-Tempo de execução: 95.647 ms
-Tempo de execução: 253.328 ms
-Tempo de execução: 100.48 ms
+785.296
+768.176
+765.296
+769.023
+791.883
+697.048
+742.13
+788.008
+801.808
+795.461

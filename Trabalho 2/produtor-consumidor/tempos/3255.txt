@@ -1,10 +1,10 @@
-Tempo de execução: 143.088 ms
-Tempo de execução: 100.304 ms
-Tempo de execução: 127.02 ms
-Tempo de execução: 123.828 ms
-Tempo de execução: 155.205 ms
-Tempo de execução: 70.48 ms
-Tempo de execução: 62.824 ms
-Tempo de execução: 122.766 ms
-Tempo de execução: 69.409 ms
-Tempo de execução: 66.764 ms
+733.15
+807.254
+794.062
+762.202
+732.294
+740.871
+763.006
+819.341
+769.49
+728.703

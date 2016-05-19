@@ -1,10 +1,10 @@
-Tempo de execução: 218.965 ms
-Tempo de execução: 218.867 ms
-Tempo de execução: 218.965 ms
-Tempo de execução: 220.779 ms
-Tempo de execução: 218.815 ms
-Tempo de execução: 97.382 ms
-Tempo de execução: 91.812 ms
-Tempo de execução: 69.31 ms
-Tempo de execução: 216.221 ms
-Tempo de execução: 90.999 ms
+765.154
+763.631
+787.81
+755.568
+762.921
+749.554
+790.039
+803.99
+792.315
+701.987

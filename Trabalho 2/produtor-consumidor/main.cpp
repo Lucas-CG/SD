@@ -9,6 +9,7 @@
 #include <chrono>			//std::chrono
 #include <functional>		//std::ref
 #include <cmath>
+#include <fstream>
 
 //semaphore for ME of the vector numbers
 sem_t mutex;
@@ -152,10 +153,14 @@ int main(int argc, char** argv) {
 	sem_destroy(&isEmpty);
 
 	//getting time for the end
-	auto endTime = std::chrono::steady_clock::now();
-
-	std::cout << "Tempo de execução: " << std::chrono::duration<double, std::milli>(endTime - startTime).count() << " ms" << std::endl;
+	auto endTime = std::chrono::steady_clock::now();	
 	
+	//archive name
+	std::string fileName = "tempos/" + std::to_string(N) + std::to_string(numThreadsProducers) + std::to_string(numThreadsConsumers)+ ".txt";
+	std::fstream fs;
+	fs.open(fileName, std::fstream::in | std::fstream::out | std::fstream::app);
+	fs << std::chrono::duration<double, std::milli>(endTime - startTime).count() << std::endl;
+	fs.close();
 	return 0;
 
 }
