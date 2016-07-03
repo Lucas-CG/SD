@@ -14,12 +14,12 @@ all: calculate_server calculate_client
 	$(CXX) -std=c++11 -Wall -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H $(INC) -c $< -o $@
 
 calculate_server: server.o $(GEN_OBJ)
-	$(CXX) $^ -o $@ -L/usr/local/lib -lthrift 
+	$(CXX) $^ -o $@ -L/usr/local/lib -lthrift -lthriftnb -levent
 
 calculate_client: client.o $(GEN_OBJ)
 	$(CXX) $^ -o $@ -L/usr/local/lib -lthrift 
 
 clean:
-	$(RM) *.o Calculate_server Calculate_client
+	$(RM) *.o calculate_server calculate_client
 
 

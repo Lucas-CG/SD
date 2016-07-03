@@ -1,0 +1,23 @@
+g++ -std=c++11 -Wall -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -I/usr/local/include/thrift -I/usr/local/include -c server.cpp -o server.o
+server.cpp: In member function ‘virtual void CalculatorHandler::log(std::vector<double>&, const std::vector<double>&)’:
+server.cpp:61:16: warning: unused variable ‘it’ [-Wunused-variable]
+     for(auto & it : received) {
+                ^
+server.cpp: In member function ‘virtual void CalculatorHandler::root(std::vector<double>&, const std::vector<double>&)’:
+server.cpp:70:15: warning: unused variable ‘it’ [-Wunused-variable]
+     for(auto &it : received){
+               ^
+g++ -std=c++11 -Wall -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -I/usr/local/include/thrift -I/usr/local/include -c Calculator.cpp -o Calculator.o
+g++ -std=c++11 -Wall -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -I/usr/local/include/thrift -I/usr/local/include -c calculator_constants.cpp -o calculator_constants.o
+g++ -std=c++11 -Wall -DHAVE_INTTYPES_H -DHAVE_NETINET_IN_H -I/usr/local/include/thrift -I/usr/local/include -c calculator_types.cpp -o calculator_types.o
+g++ server.o Calculator.o calculator_constants.o calculator_types.o -o calculate_server -L/usr/local/lib -lthrift 
+server.o: In function `main':
+server.cpp:(.text+0x1ce): undefined reference to `apache::thrift::server::TNonblockingServer::serve()'
+server.cpp:(.text+0x1e2): undefined reference to `apache::thrift::server::TNonblockingServer::~TNonblockingServer()'
+server.cpp:(.text+0x285): undefined reference to `apache::thrift::server::TNonblockingServer::~TNonblockingServer()'
+server.o: In function `apache::thrift::server::TNonblockingServer::TNonblockingServer(boost::shared_ptr<apache::thrift::TProcessor> const&, boost::shared_ptr<apache::thrift::protocol::TProtocolFactory> const&, int, boost::shared_ptr<apache::thrift::concurrency::ThreadManager> const&)':
+server.cpp:(.text._ZN6apache6thrift6server18TNonblockingServerC2ERKN5boost10shared_ptrINS0_10TProcessorEEERKNS4_INS0_8protocol16TProtocolFactoryEEEiRKNS4_INS0_11concurrency13ThreadManagerEEE[_ZN6apache6thrift6server18TNonblockingServerC5ERKN5boost10shared_ptrINS0_10TProcessorEEERKNS4_INS0_8protocol16TProtocolFactoryEEEiRKNS4_INS0_11concurrency13ThreadManagerEEE]+0x48): undefined reference to `vtable for apache::thrift::server::TNonblockingServer'
+server.cpp:(.text._ZN6apache6thrift6server18TNonblockingServerC2ERKN5boost10shared_ptrINS0_10TProcessorEEERKNS4_INS0_8protocol16TProtocolFactoryEEEiRKNS4_INS0_11concurrency13ThreadManagerEEE[_ZN6apache6thrift6server18TNonblockingServerC5ERKN5boost10shared_ptrINS0_10TProcessorEEERKNS4_INS0_8protocol16TProtocolFactoryEEEiRKNS4_INS0_11concurrency13ThreadManagerEEE]+0x1b1): undefined reference to `apache::thrift::server::TNonblockingServer::setThreadManager(boost::shared_ptr<apache::thrift::concurrency::ThreadManager>)'
+collect2: error: ld returned 1 exit status
+Makefile:17: recipe for target 'calculate_server' failed
+make: *** [calculate_server] Error 1
