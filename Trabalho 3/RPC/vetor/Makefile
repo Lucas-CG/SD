@@ -17,7 +17,7 @@ calculate_server: server.o $(GEN_OBJ)
 	$(CXX) $^ -o $@ -L/usr/local/lib -lthrift -lthriftnb -levent
 
 calculate_client: client.o $(GEN_OBJ)
-	$(CXX) $^ -o $@ -L/usr/local/lib -lthrift 
+	$(CXX) $^ -o $@ -L/usr/local/lib -lthrift -lpthread
 
 clean:
 	$(RM) *.o calculate_server calculate_client
