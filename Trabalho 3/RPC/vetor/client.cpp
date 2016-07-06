@@ -22,14 +22,12 @@ using namespace oparitmeticas;
 
 std::vector<double> generateRandomVector(int size) {
   srand(time(NULL));
-  std::vector<std::vector<double> > ret;
+  std::vector<double> ret;
   ret.reserve(size);
-  double lt[size];
   for (unsigned long int i = 0; i < size; i++){
-      lt[i]=(rand() % size + 1);            
+      ret.push_back(rand() % size + 1);            
   }
-  std::vector<double> vec (lt, lt + sizeof(lt) / sizeof(lt[0]) );
-  return vec;
+  return ret;
 }
 
 
@@ -67,7 +65,7 @@ void getPower(std::vector<double> &vec, int begin, int end){
 int main(int argc, char** argv) {
 
 
-  std::vector<double> vec = generateRandomVector(10000000);
+  std::vector<double> vec = generateRandomVector(100000000);
   std::vector<std::thread> threads;  
   int numThreads = 2;
   int partSize = vec.size()/numThreads;
