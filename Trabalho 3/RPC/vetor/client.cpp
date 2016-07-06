@@ -10,6 +10,8 @@
 #include <cmath> //std::pow, std::sqrt, std::log
 #include <iostream> //std::cout, std::endl
 #include <thread>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 using namespace apache::thrift;
@@ -17,6 +19,18 @@ using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
 
 using namespace oparitmeticas;
+
+std::vector<double> generateRandomVector(int size) {
+  srand(time(NULL));
+  std::vector<std::vector<double> > ret;
+  ret.reserve(size);
+  double lt[size];
+  for (unsigned long int i = 0; i < size; i++){
+      lt[i]=(rand() % size + 1);            
+  }
+  std::vector<double> vec (lt, lt + sizeof(lt) / sizeof(lt[0]) );
+  return vec;
+}
 
 
 void getPower(std::vector<double> &vec, int begin, int end){
@@ -52,13 +66,12 @@ void getPower(std::vector<double> &vec, int begin, int end){
 
 int main(int argc, char** argv) {
 
-  static const double lt[] = {2.0, 3.0, 5.0,6.0};
-  int sizeList = sizeof(lt)/sizeof(lt[0]);
-  std::vector<double> vec (lt, lt + sizeList );
+
+  std::vector<double> vec = generateRandomVector(10000000);
   std::vector<std::thread> threads;  
   int numThreads = 2;
-  int partSize = sizeList/numThreads;
-  
+  int partSize = vec.size()/numThreads;
+
   for (int i = 0; i < numThreads; i++) {   
     threads.push_back( std::thread(getPower,std::ref(vec), i*partSize, (numThreads - i - 1)*partSize) );
   }
@@ -68,5 +81,4 @@ int main(int argc, char** argv) {
   for(auto& value: vec){
     std::cout << value << std::endl;  
   }
-  
 }
