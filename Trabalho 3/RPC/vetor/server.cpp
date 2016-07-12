@@ -49,17 +49,13 @@ class CalculatorHandler : virtual public CalculatorIf {
     }
 
     std::cout << "power" << std::endl;
-
-    // REMOVER!!!!
-
-    sleep(4);
+  
   }
 
   void log(std::vector<double> & _return, const std::vector<double> & received) {
-    
-        
+            
     for(auto & it : received) {
-        //it = std::log(it);
+        _return.push_back(std::log(it));    
     }
 
     std::cout << "natural log" << std::endl;
@@ -68,7 +64,7 @@ class CalculatorHandler : virtual public CalculatorIf {
   void root(std::vector<double> & _return, const std::vector<double> & received) {
 
     for(auto &it : received){
-        //it = std::sqrt(it);
+        _return.push_back(std::sqrt(it));
     }
     std::cout << "square root" << std::endl;
   }

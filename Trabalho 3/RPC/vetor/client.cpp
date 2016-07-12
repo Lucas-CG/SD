@@ -6,6 +6,7 @@
 
 #include "Calculator.h"
 
+#include <string>
 #include <vector> //std::vector
 #include <cmath> //std::pow, std::sqrt, std::log
 #include <iostream> //std::cout, std::endl
@@ -20,6 +21,18 @@ using namespace apache::thrift::transport;
 
 using namespace oparitmeticas;
 
+#ifndef numThreads
+  #define numThreads 128
+#endif
+
+#ifndef operation
+  #define operation 1
+#endif
+
+#ifndef expoent
+  #define expoent 2
+#endif
+
 std::vector<double> generateRandomVector(int size) {
   srand(time(NULL));
   std::vector<double> ret;
@@ -30,8 +43,7 @@ std::vector<double> generateRandomVector(int size) {
   return ret;
 }
 
-
-void getPower(std::vector<double> &vec, int begin, int end){
+void doOperation(std::vector<double> &vec, int begin, int end){
 
   boost::shared_ptr<TSocket> socket(new TSocket("localhost", 9090));
   boost::shared_ptr<TTransport> transport(new TFramedTransport(socket));
@@ -48,7 +60,19 @@ void getPower(std::vector<double> &vec, int begin, int end){
     cout << "ping()" << endl;
       
     try {
-      client.power(v, v, 2);    
+
+      switch(operation){
+        case 1:
+          client.power(v, v, expoent);
+          break;
+        case 2:
+          client.log(v,v);
+          break;
+        case 3:
+          client.root(v,v);
+          break;                  
+      }         
+
       for(int i=0; i< v.size(); i++){
         vec.at(begin + i) = v.at(i);
       }    
@@ -62,21 +86,17 @@ void getPower(std::vector<double> &vec, int begin, int end){
   }
 }
 
-int main(int argc, char** argv) {
 
+int main(int argc, char** argv) {
 
   std::vector<double> vec = generateRandomVector(100000000);
   std::vector<std::thread> threads;  
-  int numThreads = 2;
   int partSize = vec.size()/numThreads;
 
-  for (int i = 0; i < numThreads; i++) {   
-    threads.push_back( std::thread(getPower,std::ref(vec), i*partSize, (numThreads - i - 1)*partSize) );
+  for (int i = 0; i < numThreads; i++) {       
+    threads.push_back( std::thread(doOperation,std::ref(vec), i*partSize, (numThreads - i - 1)*partSize) );  
   }
 
   for(auto& th : threads) th.join();
   
-  for(auto& value: vec){
-    std::cout << value << std::endl;  
-  }
 }
