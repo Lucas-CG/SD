@@ -36,12 +36,9 @@ using namespace oparitmeticas;
 
 class CalculatorHandler : virtual public CalculatorIf {
  public:
-  CalculatorHandler() {
-    // Your initialization goes here
-  }
+  CalculatorHandler() {}
 
   void ping() {
-    // Your implementation goes here
     printf("ping\n");
   }
 
@@ -49,9 +46,7 @@ class CalculatorHandler : virtual public CalculatorIf {
 
     for(auto & it : received) {
         _return.push_back(std::pow(it, exp));
-    }
-
-    std::cout << "power" << std::endl;
+    }    
   
   }
 
@@ -59,17 +54,14 @@ class CalculatorHandler : virtual public CalculatorIf {
             
     for(auto & it : received) {
         _return.push_back(std::log(it));    
-    }
-
-    std::cout << "natural log" << std::endl;
+    }    
   }
 
   void root(std::vector<double> & _return, const std::vector<double> & received) {
 
     for(auto &it : received){
         _return.push_back(std::sqrt(it));
-    }
-    std::cout << "square root" << std::endl;
+    }    
   }
 
 };

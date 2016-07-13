@@ -43,10 +43,7 @@ void doOperation(std::vector<double> &vec, int begin, int end, int operation,int
   
     std::vector<double> v (vec.begin() + begin,  vec.end() - end);    
 
-    transport->open();    
-
-    client.ping();
-    cout << "ping()" << endl;
+    transport->open();        
       
     try {
 
@@ -76,15 +73,13 @@ void doOperation(std::vector<double> &vec, int begin, int end, int operation,int
 }
 
 
-int main(int argc, char** argv) {
-
-  auto startTime = std::chrono::steady_clock::now();
+int main(int argc, char** argv) {  
 
   const std::string argument1 = argv[1];
-  unsigned long int numThreads = stoi(argument1);
-  
+  int operation = stoi(argument1);  
+
   const std::string argument2 = argv[2];
-  int operation = stoi(argument2);  
+  unsigned long int numThreads = stoi(argument2);    
 
   int expoent;
 
@@ -99,6 +94,8 @@ int main(int argc, char** argv) {
   std::vector<double> vec = generateRandomVector(100000000);
   std::vector<std::thread> threads;  
   int partSize = vec.size()/numThreads;
+
+  auto startTime = std::chrono::steady_clock::now();
 
   for (int i = 0; i < numThreads; i++) {       
     threads.push_back( std::thread(doOperation,std::ref(vec), i*partSize, (numThreads - i - 1)*partSize,std::ref(operation),std::ref(expoent)) );  
