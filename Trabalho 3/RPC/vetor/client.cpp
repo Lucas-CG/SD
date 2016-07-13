@@ -6,7 +6,7 @@
 
 #include "Calculator.h"
 
-#include <string>
+#include <chrono>
 #include <vector> //std::vector
 #include <cmath> //std::pow, std::sqrt, std::log
 #include <iostream> //std::cout, std::endl
@@ -21,17 +21,6 @@ using namespace apache::thrift::transport;
 
 using namespace oparitmeticas;
 
-#ifndef numThreads
-  #define numThreads 128
-#endif
-
-#ifndef operation
-  #define operation 1
-#endif
-
-#ifndef expoent
-  #define expoent 2
-#endif
 
 std::vector<double> generateRandomVector(int size) {
   srand(time(NULL));
@@ -43,10 +32,10 @@ std::vector<double> generateRandomVector(int size) {
   return ret;
 }
 
-void doOperation(std::vector<double> &vec, int begin, int end){
+void doOperation(std::vector<double> &vec, int begin, int end, int operation,int expoent){
 
   boost::shared_ptr<TSocket> socket(new TSocket("localhost", 9090));
-  boost::shared_ptr<TTransport> transport(new TFramedTransport(socket));
+  boost::shared_ptr<TTransport> transport(new TBufferedTransport(socket));
   boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
   CalculatorClient client(protocol);
       
@@ -89,14 +78,34 @@ void doOperation(std::vector<double> &vec, int begin, int end){
 
 int main(int argc, char** argv) {
 
+  auto startTime = std::chrono::steady_clock::now();
+
+  const std::string argument1 = argv[1];
+  unsigned long int numThreads = stoi(argument1);
+  
+  const std::string argument2 = argv[2];
+  int operation = stoi(argument2);  
+
+  int expoent;
+
+  if(argc == 4){
+    const std::string argument3 = argv[3];
+    expoent = stoi(argument3);
+  } 
+  else{
+    expoent = 2;
+  } 
+
   std::vector<double> vec = generateRandomVector(100000000);
   std::vector<std::thread> threads;  
   int partSize = vec.size()/numThreads;
 
   for (int i = 0; i < numThreads; i++) {       
-    threads.push_back( std::thread(doOperation,std::ref(vec), i*partSize, (numThreads - i - 1)*partSize) );  
+    threads.push_back( std::thread(doOperation,std::ref(vec), i*partSize, (numThreads - i - 1)*partSize,std::ref(operation),std::ref(expoent)) );  
   }
 
   for(auto& th : threads) th.join();
-  
+ 
+  auto endTime = std::chrono::steady_clock::now(); 
+  std::cout << "Tempo de execução: "<<std::chrono::duration<double, std::milli>(endTime - startTime).count() << std::endl; 
 }
