@@ -12,7 +12,7 @@ def check(f, np):
 			else:
 				d[valor]= 1
 
-	if len(d.keys()) != np:
+	if len(d.keys()) != int(np):
 		print len(d.keys())
 		return False
 
@@ -20,6 +20,8 @@ def check(f, np):
 		if j!=100:
 			print "agora"
 			return False
+
+	return True
 
 if (len(sys.argv) != 3): print "Uso: python check.py [nome do arquivo] [numero de processos]"
 
