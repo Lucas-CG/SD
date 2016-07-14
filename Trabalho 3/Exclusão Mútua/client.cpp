@@ -5,7 +5,6 @@
 #include "MutualExclusion.h"
 
 #include <unistd.h> //fork, getpid()
-#include <random> //random number generators / distributions ???
 #include <chrono> //std::chrono::steady_clock
 #include <iostream> //std::cout, std::endl
 #include <string> //std::string
@@ -80,7 +79,7 @@ void mutexOperation(){
 
 int main(int argc, char** argv) {
 
-  if (argc != 3) std::cout << "Uso: ./client [arrival: bulk OR sequential] [número de processos]" << std::endl;
+  if (argc != 3 || (argv[1] != "bulk" || argv[1] != "sequential")) std::cout << "Uso: ./client [arrival: bulk OR sequential] [número de processos]" << std::endl;
 
   std::string arrival = argv[1];
 

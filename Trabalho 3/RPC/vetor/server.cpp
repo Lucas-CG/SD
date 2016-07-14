@@ -1,26 +1,14 @@
 #include "Calculator.h"
 #include <thrift/protocol/TBinaryProtocol.h>
-//#include <thrift/server/TSimpleServer.h>
 #include <thrift/transport/TServerSocket.h>
 #include <thrift/transport/TBufferTransports.h>
 #include <thrift/transport/TTransportUtils.h>
-
-
-//multithreaded server
-#include <thrift/concurrency/ThreadManager.h>
-#include <thrift/concurrency/PosixThreadFactory.h>
-#include <thrift/server/TNonblockingServer.h>
-
 #include <thrift/server/TThreadedServer.h>
-#include <boost/make_shared.hpp>
-
 
 #include <vector> //std::vector
 #include <cmath> //std::pow, std::sqrt, std::log
 #include <iostream> //std::cout, std::endl
 
-
-#include <unistd.h> //sleep para testes
 
 using namespace ::apache::thrift;
 

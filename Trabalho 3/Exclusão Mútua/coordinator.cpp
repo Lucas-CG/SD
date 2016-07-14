@@ -45,7 +45,7 @@ class MutualExclusionHandler : virtual public MutualExclusionIf {
     auto now = system_clock::now().time_since_epoch();
     
     auto nowinmillis = std::chrono::duration_cast<std::chrono::milliseconds>(now).count();
-    //time_t now_date = system_clock::to_time_t(now);
+    
     
     sem_wait(&mutexLog);
       
@@ -54,11 +54,8 @@ class MutualExclusionHandler : virtual public MutualExclusionIf {
     
     sem_wait(&mutex);
     
-    //now = system_clock::now();
-    //now_date = system_clock::to_time_t(now);
-    
     sem_wait(&mutexLog);
-    //escreve no log GRANT
+    
     writeLog(nowinmillis,"GRANT");
 
     sem_post(&mutexLog);
@@ -67,16 +64,13 @@ class MutualExclusionHandler : virtual public MutualExclusionIf {
 
   void release() {
     
-    //system_clock::time_point now = system_clock::now();
-    //time_t now_date = system_clock::to_time_t(now);
-    
     auto now = system_clock::now().time_since_epoch();
     
     auto nowinmillis = std::chrono::duration_cast<std::chrono::milliseconds>(now).count();    
     
     sem_post(&mutex);
     sem_wait(&mutexLog);
-    //escreve no log RELEASE
+
     writeLog(nowinmillis,"RELEASE");
     sem_post(&mutexLog);
     

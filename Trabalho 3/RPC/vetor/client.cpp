@@ -6,13 +6,13 @@
 
 #include "Calculator.h"
 
-#include <chrono>
+#include <chrono> //std::chrono::steady_clock
 #include <vector> //std::vector
 #include <cmath> //std::pow, std::sqrt, std::log
 #include <iostream> //std::cout, std::endl
-#include <thread>
-#include <cstdlib>
-#include <ctime>
+#include <thread> //std::thread
+#include <cstdlib> //rand, srand
+#include <ctime> //time
 
 using namespace std;
 using namespace apache::thrift;
