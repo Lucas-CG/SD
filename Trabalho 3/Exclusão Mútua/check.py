@@ -1,6 +1,6 @@
 import sys
 
-def check(f):
+def check(f, np):
 	d = {};
 	f = open(f,'r')
 	for line in f:
@@ -12,13 +12,15 @@ def check(f):
 			else:
 				d[valor]= 1
 
-	if len(d.keys()) != 100:
-		return false
+	if len(d.keys()) != np:
+		print len(d.keys())
+		return False
 
 	for j in d.values():
 		if j!=100:
-			return false
+			print "agora"
+			return False
 
-if (len(sys.argv) != 2): print "Uso: python check.py [nome do arquivo]"
+if (len(sys.argv) != 3): print "Uso: python check.py [nome do arquivo] [numero de processos]"
 
-check(sys.argv[1])
+print check(sys.argv[1], sys.argv[2])
