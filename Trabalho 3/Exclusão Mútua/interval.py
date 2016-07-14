@@ -11,4 +11,4 @@ def interval(f):
 	print maximo-minimo
 	
 
-#print interval(sys.argv[1])
+interval(sys.argv[1])
