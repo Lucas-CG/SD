@@ -10,8 +10,8 @@
 #include <iostream> //std::cout, std::endl
 #include <string> //std::string
 #include <stdint.h> //int32_t
-#include <cstdlib>
-#include <fstream>
+#include <cstdlib> //rand, srand
+#include <fstream> //std::ofstream
 
 
 using namespace std;
@@ -105,8 +105,7 @@ int main(int argc, char** argv) {
 
   }
     
-  mutexOperation();
-    
+  mutexOperation();      
   return 0;
 
   
